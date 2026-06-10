@@ -1,0 +1,10 @@
+Python bytecode: __pycache__/, *.pyc
+Virtual environment: venv/
+Node modules: node_modules/
+Environment secrets: .env
+Uploaded files: uploads/
+Vector store data: vectorstore/
+SQLite database: *.db
+IDE files: .vscode/, .idea/
+OS files: Thumbs.db, .DS_Store
+Build output: dist/, build/

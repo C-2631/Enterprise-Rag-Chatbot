@@ -1,0 +1,23 @@
+# Python / Backend
+venv/
+__pycache__/
+*.pyc
+.env
+rag_chatbot.db
+chroma_db/
+.pytest_cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.eslintcache
+npm-debug.log
+yarn-error.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/

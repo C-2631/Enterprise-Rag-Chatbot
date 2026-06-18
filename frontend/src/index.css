@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css");
+
+/* ============================================
+   TAILWIND DIRECTIVES
+   These three lines pull in Tailwind's styles.
+   @tailwind base     → Reset + base HTML styles
+   @tailwind components → Component classes (.container, etc.)
+   @tailwind utilities  → All utility classes (bg-*, text-*, p-*, etc.)
+   ============================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   GOOGLE FONTS — Inter
+   We load the Inter font with multiple weights:
+   300 (light), 400 (regular), 500 (medium),
+   600 (semibold), 700 (bold)
+   ============================================ */
+
+/* ============================================
+   BASE LAYER — Global Defaults
+   @layer base lets us add styles that Tailwind
+   can properly override with utilities
+   ============================================ */
+@layer base {
+  /* Apply to the entire page */
+  html {
+    scroll-behavior: smooth;  /* Smooth scrolling when clicking anchor links */
+  }
+
+  body {
+    @apply bg-primary text-white font-sans;  /* Dark bg, white text, Inter font */
+    -webkit-font-smoothing: antialiased;     /* Smoother font rendering on Mac */
+    -moz-osx-font-smoothing: grayscale;      /* Smoother font rendering on Firefox Mac */
+  }
+
+  /* Remove default focus outline, add custom one */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-primary;
+  }
+
+  /* Custom scrollbar (dark theme) */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-primary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-tertiary;
+  }
+}
+
+/* ============================================
+   COMPONENT LAYER — Reusable Custom Classes
+   These are classes you can use like Tailwind
+   utilities but they're your own design system
+   ============================================ */
+@layer components {
+  /* 
+   * GLASSMORPHISM EFFECT
+   * Creates a frosted glass look:
+   * - Semi-transparent background
+   * - Blurred background content  
+   * - Subtle border
+   * - Soft shadow
+   * Usage: <div className="glass">...</div>
+   */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);  /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* 
+   * NEOMORPHIC BUTTON (raised)
+   * Creates a soft, raised/embossed button effect
+   * Usage: <button className="neo-button">Click</button>
+   */
+  .neo-button {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200;
+    background: #1e293b;
+    box-shadow: 
+      8px 8px 16px rgba(0, 0, 0, 0.25),
+      -8px -8px 16px rgba(255, 255, 255, 0.03);
+  }
+
+  .neo-button:hover {
+    box-shadow: 
+      4px 4px 8px rgba(0, 0, 0, 0.4),
+      -4px -4px 8px rgba(255, 255, 255, 0.05);
+    transform: translateY(1px);  /* Slight press effect */
+  }
+
+  .neo-button:active {
+    box-shadow: 
+      inset 4px 4px 8px rgba(0, 0, 0, 0.4),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+  }
+
+  /* 
+   * GRADIENT TEXT
+   * Makes text have a gradient fill
+   * Usage: <h1 className="gradient-text">Hello</h1>
+   */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple to-accent bg-clip-text text-transparent;
+  }
+
+  /* 
+   * GRADIENT BUTTON
+   * A bold button with purple-to-cyan gradient
+   * Usage: <button className="gradient-button">Get Started</button>
+   */
+  .gradient-button {
+    @apply px-8 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, #6366f1, #38bdf8);
+  }
+
+  .gradient-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* ============================================
+   UTILITY LAYER — Small Helpers
+   ============================================ */
+@layer utilities {
+  /* Glow effect for accent elements */
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+
+  /* Cybernetic Neon Glows */
+  .glow-teal-neon {
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.35);
+  }
+  
+  .glow-purple-neon {
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.35);
+  }
+
+  /* Holographic Matrix Grid Backdrops */
+  .cyber-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    animation: cyber-grid-drift 30s linear infinite;
+  }
+  
+  .cyber-grid-purple {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+    animation: cyber-grid-drift 40s linear infinite;
+  }
+
+  /* Blinking Typing Cursor */
+  .chat-cursor::after {
+    content: "▋";
+    font-weight: bold;
+    display: inline-block;
+    color: #38bdf8;
+    animation: cursor-blink 1.2s infinite;
+  }
+
+  /* LaTeX Math Block Formatting */
+  .math-block {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.95em;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    overflow-x: auto;
+    color: #e2e8f0;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+  }
+
+  .math-inline {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    padding: 0.15rem 0.4rem;
+    border-radius: 6px;
+    font-size: 0.9em;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+  }
+  
+  /* Glowing Scanline Overlay */
+  .scanlines {
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%, 
+      rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 10;
+  }
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+@keyframes cyber-grid-drift {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes rotate-gradient {
+  100% {
+    transform: rotate(360deg);
+  }
+}
